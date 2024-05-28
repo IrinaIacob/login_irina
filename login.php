@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $host = "localhost";
     $dbusername = "root";
     $dbpassword = "";
-    $dbname = "auth";
+    $dbname = "baza_de_date_licenta";
     
     $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
     if($conn->connect_error){
@@ -19,10 +19,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     }
 
-    $query = "SELECT *FROM users WHERE user='$username' AND pass='$password'";
+    $query = "SELECT *FROM auth WHERE username='$username' AND password='$password'";
     $result = $conn->query($query);
-    if($result->num_rows == 1){
-        header("Location: uploadpage.html");
+    if($result->num_rows == 1 AND $username == "employee"){
+        header("Location: dashboard_employee.php");
         exit();
 
     }
